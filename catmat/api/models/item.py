@@ -15,7 +15,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from catmat.api.models.base import Base
+from catmat.core.base import Base
 
 if TYPE_CHECKING:
     from catmat.api.models.pdm import Pdm

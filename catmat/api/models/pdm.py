@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from catmat.api.models.base import Base
+from catmat.core.base import Base
 
 if TYPE_CHECKING:
     from catmat.api.models.classes import Class
