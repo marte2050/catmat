@@ -9,6 +9,40 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d catmat"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  etl:
+    build:
+      context: ..
+      dockerfile: devops/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://root:root@db:5432/catmat
+      COMPRAS_API_BASE_URL: https://dadosabertos.compras.gov.br/modulo-material/
+      INGESTION_PAGE_SIZE: "500"
+      INGESTION_CONCURRENCY: "1"
+      INGESTION_REQUEST_INTERVAL: "0.5"
+      HTTP_RETRIES: "8"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["sleep", "infinity"]
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.catmat-etl.schedule: "0 3 * * *"
+      ofelia.job-exec.catmat-etl.command: "catmat-etl sync all"
+      ofelia.job-exec.catmat-etl.no-overlap: "true"
+
+  scheduler:
+    image: mcuadros/ofelia:latest
+    depends_on:
+      - etl
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
   db_data:
