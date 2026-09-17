@@ -13,13 +13,17 @@ import httpx
 
 from catmat.core.config import settings
 
-from .contracts.iclient import RETRYABLE_STATUS_CODES, TRANSPORT_RETRIES
+from .contracts.iclient import (
+    RETRYABLE_STATUS_CODES,
+    TRANSPORT_RETRIES,
+    IComprasApiClient,
+)
 from .errors.etl_error_request import ETLRequestError
 
 logger = logging.getLogger(__name__)
 
 
-class ComprasApiClient:
+class ComprasApiClient(IComprasApiClient):
     def __init__(
         self,
         *,

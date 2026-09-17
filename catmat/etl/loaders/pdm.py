@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from catmat.api.models import Pdm
 from catmat.etl.loaders.base import BaseLoader
-from catmat.etl.schemas.schemas import PdmDTO
+from catmat.etl.schemas import PdmDTO
 
 
 class PdmLoader(BaseLoader):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from catmat.api.models import Group
 from catmat.etl.loaders.base import BaseLoader
-from catmat.etl.schemas.schemas import GroupDTO
+from catmat.etl.schemas import GroupDTO
 
 
 class GroupLoader(BaseLoader):

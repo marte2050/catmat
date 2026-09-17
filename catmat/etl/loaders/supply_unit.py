@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Sequence
 
-from catmat.api.models import SupplyUnit
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from catmat.api.models import Pdm, SupplyUnit
 from catmat.etl.loaders.base import BaseLoader
-from catmat.etl.schemas.schemas import SupplyUnitDTO
+from catmat.etl.repository import existing_codes
+from catmat.etl.schemas import SupplyUnitDTO
 
 logger = logging.getLogger(__name__)
 
@@ -29,3 +33,24 @@ class SupplyUnitLoader(BaseLoader):
             supply_unit_status=dto.supply_unit_status,
             supply_unit_updated_at=dto.supply_unit_updated_at,
         )
+
+    async def process_batch(
+        self,
+        session: AsyncSession,
+        dtos: Sequence[SupplyUnitDTO],
+        *,
+        batch_size: int,
+    ) -> int:
+        pdm_codes = {dto.pdm_code for dto in dtos}
+        existing_pdms = await existing_codes(session, Pdm, "pdm_code", pdm_codes)
+        missing = pdm_codes - existing_pdms
+        if missing:
+            logger.warning(
+                "[%s] %s PDMs referenciados não existem; unidades ignoradas: %s",
+                self.name,
+                len(missing),
+                sorted(missing),
+            )
+
+        filtered = [dto for dto in dtos if dto.pdm_code in existing_pdms]
+        return await super().process_batch(session, filtered, batch_size=batch_size)

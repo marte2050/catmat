@@ -32,6 +32,23 @@ def model_to_rows(instances: Iterable[DeclarativeBase]) -> list[dict[str, Any]]:
     return [model_to_row(instance) for instance in instances]
 
 
+def dedupe_rows(
+    rows: Iterable[dict[str, Any]],
+    index_elements: Sequence[str],
+) -> list[dict[str, Any]]:
+    """Remove linhas com chave repetida; a última ocorrência vence.
+
+    O PostgreSQL não permite que um mesmo `ON CONFLICT DO UPDATE` afete a mesma
+    linha duas vezes numa instrução, e a API pode devolver chaves duplicadas na
+    mesma página.
+    """
+    deduped: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for row in rows:
+        key = tuple(row[element] for element in index_elements)
+        deduped[key] = row
+    return list(deduped.values())
+
+
 def _chunks(rows: Sequence[dict[str, Any]], size: int) -> Iterable[Sequence[dict[str, Any]]]:
     for start in range(0, len(rows), size):
         yield rows[start : start + size]
@@ -57,7 +74,7 @@ async def bulk_upsert(
             if column.key not in primary_keys
         ]
 
-    rows = model_to_rows(instances)
+    rows = dedupe_rows(model_to_rows(instances), index_elements)
     for chunk in _chunks(rows, chunk_size):
         statement = insert(model).values(list(chunk))
         if update_columns:
@@ -74,4 +91,26 @@ async def bulk_upsert(
             )
         await session.execute(statement)
 
-    return len(instances)
+    return len(rows)
+
+
+async def bulk_insert_ignore(
+    session: AsyncSession,
+    model: type[DeclarativeBase],
+    instances: Sequence[DeclarativeBase],
+    *,
+    index_elements: Sequence[str],
+    chunk_size: int = 1000,
+) -> int:
+    """Insere em lote ignorando conflitos (`INSERT ... ON CONFLICT DO NOTHING`)."""
+    if not instances:
+        return 0
+
+    rows = dedupe_rows(model_to_rows(instances), index_elements)
+    for chunk in _chunks(rows, chunk_size):
+        statement = insert(model).values(list(chunk)).on_conflict_do_nothing(
+            index_elements=list(index_elements)
+        )
+        await session.execute(statement)
+
+    return len(rows)

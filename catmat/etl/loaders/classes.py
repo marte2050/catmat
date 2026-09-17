@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from catmat.api.models import Class
 from catmat.etl.loaders.base import BaseLoader
-from catmat.etl.schemas.schemas import ClassDTO
+from catmat.etl.schemas import ClassDTO
 
 
 class ClassLoader(BaseLoader):

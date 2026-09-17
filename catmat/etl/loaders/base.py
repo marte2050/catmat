@@ -8,7 +8,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 from catmat.etl.client import ComprasApiClient
 from catmat.etl.repository import bulk_upsert
-from catmat.etl.schemas.schemas import ApiModel
+from catmat.etl.schemas import ApiModel
 
 
 class BaseLoader(ABC):
