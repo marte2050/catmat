@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, ForeignKey, Integer, String
+from sqlalchemy import Boolean, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from catmat.core.base import Base
@@ -17,11 +17,11 @@ class ExpenseNature(Base):
 
     __tablename__ = "expense_natures"
 
-    expense_nature_code: Mapped[int] = mapped_column(
-        Integer, primary_key=True, autoincrement=False
+    expense_nature_code: Mapped[str] = mapped_column(
+        String(20), primary_key=True, autoincrement=False
     )
-    expense_nature_name: Mapped[str] = mapped_column(String(255))
-    expense_nature_status: Mapped[bool] = mapped_column(Boolean)
+    expense_nature_name: Mapped[str | None] = mapped_column(String(255))
+    expense_nature_status: Mapped[bool | None] = mapped_column(Boolean)
 
     pdms: Mapped[list[PdmExpenseNature]] = relationship(
         back_populates="expense_nature",
@@ -38,7 +38,8 @@ class PdmExpenseNature(Base):
     pdm_code: Mapped[int] = mapped_column(
         ForeignKey("pdms.pdm_code", ondelete="CASCADE"), primary_key=True
     )
-    expense_nature_code: Mapped[int] = mapped_column(
+    expense_nature_code: Mapped[str] = mapped_column(
+        String(20),
         ForeignKey("expense_natures.expense_nature_code", ondelete="CASCADE"),
         primary_key=True,
         index=True,
