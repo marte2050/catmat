@@ -123,3 +123,6 @@ Os volumes observados na API são:
 | Natureza de despesa | `5_consultarMaterialNaturezaDespesa` | 22 | 3 |
 | Unidade de fornecimento | `6_consultarMaterialUnidadeFornecimento` | 38.096 | 77 |
 
+### Diagrama das tabelas
+
+![alt text](docs/diagram.png "Diagrama das tabelas")
