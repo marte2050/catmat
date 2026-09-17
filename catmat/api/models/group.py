@@ -13,9 +13,8 @@ if TYPE_CHECKING:
 
 
 class Group(Base):
-    """ 
-        Grupos são responsável por organizar as classes de materiais.
-    """
+    """Grupos são responsáveis por organizar as classes de materiais."""
+
     __tablename__ = "groups"
 
     group_code: Mapped[int] = mapped_column(

@@ -14,10 +14,9 @@ if TYPE_CHECKING:
 
 
 class Class(Base):
-    """
-        Representam a tabela de classes do Catmat, que contém informações sobre as classes de materiais cadastradas no sistema no
-        comprasnet.
-    """
+    """Representa a tabela de classes do Catmat, com as classes de materiais
+    cadastradas no ComprasNet."""
+
     __tablename__ = "classes"
 
     class_code: Mapped[int] = mapped_column(

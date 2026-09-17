@@ -16,11 +16,10 @@ if TYPE_CHECKING:
 
 
 class Pdm(Base):
-    """
-        A model PDM (Plano Descritivo de Materiais) representa um plano descritivo de materiais, que é uma estrutura que descreve 
-        as caracteríticas dos materiais e faz o agrupamento de catmats. Cada PDM irá possuir um tipo de despesa e terá as unidades
-        de fornecimento associadas a ele.
-    """
+    """PDM (Plano Descritivo de Materiais) descreve as características dos
+    materiais e agrupa os catmats. Cada PDM possui um tipo de despesa e as
+    unidades de fornecimento associadas."""
+
     __tablename__ = "pdms"
 
     pdm_code: Mapped[int] = mapped_column(

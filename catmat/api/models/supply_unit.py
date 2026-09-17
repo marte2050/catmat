@@ -13,9 +13,8 @@ if TYPE_CHECKING:
 
 
 class SupplyUnit(Base):
-    """
-        Aqui definimos as unidades de fornecimento, ao qual são associados a um PDM.
-    """
+    """Unidades de fornecimento associadas a um PDM."""
+
     __tablename__ = "supply_units"
 
     pdm_code: Mapped[int] = mapped_column(

@@ -22,11 +22,11 @@ if TYPE_CHECKING:
 
 
 class Item(Base):
-    """
-    Items representa a tabela de itens do Catmat, que contém informações sobre os produtos ou serviços cadastrados no sistema. 
-    Cada item possui um código único, descrição, status, informações sobre sustentabilidade, código e descrição NCM, entre outros atributos. 
-    A tabela também mantém um relacionamento com a tabela de PDMs (Plano Descritivo de Materiais).
-    """
+    """Item representa a tabela de itens do Catmat, com os produtos ou serviços
+    cadastrados no sistema. Cada item possui código único, descrição, status,
+    informações de sustentabilidade, código e descrição NCM, e se relaciona
+    com um PDM (Plano Descritivo de Materiais)."""
+
     __tablename__ = "items"
 
     item_code: Mapped[int] = mapped_column(

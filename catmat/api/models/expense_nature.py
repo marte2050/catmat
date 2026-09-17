@@ -12,11 +12,8 @@ if TYPE_CHECKING:
 
 
 class ExpenseNature(Base):
-    """
-        Esse tabela é responsável por definir as naturezas de despesas que podem ser associadas aos PDMS cadastrados no sistema. 
-        Cada natureza de despesa possui um código único, um nome descritivo e um status que indica se a natureza de despesa está ativa 
-        ou inativa.
-    """
+    """Tabela de naturezas de despesa que podem ser associadas aos PDMs. Cada
+    natureza possui código único, nome descritivo e status (ativa/inativa)."""
 
     __tablename__ = "expense_natures"
 
@@ -34,6 +31,8 @@ class ExpenseNature(Base):
 
 
 class PdmExpenseNature(Base):
+    """Associação N:N entre PDMs e naturezas de despesa."""
+
     __tablename__ = "pdm_expense_natures"
 
     pdm_code: Mapped[int] = mapped_column(
