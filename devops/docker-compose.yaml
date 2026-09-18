@@ -15,6 +15,14 @@ services:
       timeout: 5s
       retries: 10
 
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
   etl:
     build:
       context: ..
@@ -26,15 +34,21 @@ services:
       INGESTION_CONCURRENCY: "1"
       INGESTION_REQUEST_INTERVAL: "0.5"
       HTTP_RETRIES: "8"
+      QDRANT_URL: http://qdrant:6333
     depends_on:
       db:
         condition: service_healthy
+      qdrant:
+        condition: service_started
     command: ["sleep", "infinity"]
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.catmat-etl.schedule: "0 3 * * *"
       ofelia.job-exec.catmat-etl.command: "catmat-etl sync all"
       ofelia.job-exec.catmat-etl.no-overlap: "true"
+      ofelia.job-exec.catmat-embed.schedule: "0 5 * * *"
+      ofelia.job-exec.catmat-embed.command: "catmat-embed sync items"
+      ofelia.job-exec.catmat-embed.no-overlap: "true"
 
   scheduler:
     image: mcuadros/ofelia:latest
@@ -46,3 +60,4 @@ services:
 
 volumes:
   db_data:
+  qdrant_data:
