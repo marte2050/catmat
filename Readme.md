@@ -275,19 +275,3 @@ A unidade de fornecimento é um código que identifica a unidade de medida assoc
 | **dataHoraAtualizacao** | Data e hora em que a unidade de fornecimento foi atualizada. |
 
 Para fazer a busca de unidade de fornecimento podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/6_consultarMaterialUnidadeFornecimento` da API do comprasnet, que retorna uma lista de unidades de fornecimento disponíveis.
-
-### Paginação e volumes
-
-Todas as rotas de `modulo-material` retornam um envelope JSON com o campo `resultado` (lista de registros) e os campos de paginação `totalRegistros`, `totalPaginas` e `paginasRestantes`. A paginação é feita pelos parâmetros de query `pagina` (número da página, iniciando em 1) e `tamanhoPagina` (quantidade de registros por página, no intervalo de **10 a 500**; o valor padrão é 10).
-
-Os volumes observados na API são:
-
-| Recurso | Endpoint | Registros | Páginas com `tamanhoPagina=500` |
-| --- | --- | ---: | ---: |
-| Grupos | `1_consultarGrupoMaterial` | 79 | 1 |
-| Classes | `2_consultarClasseMaterial` | 711 | 2 |
-| PDMs | `3_consultarPdmMaterial` | 20.433 | 41 |
-| Catmats | `4_consultarItemMaterial` | 344.984 | 690 |
-| Natureza de despesa | `5_consultarMaterialNaturezaDespesa` | 22 | 3 |
-| Unidade de fornecimento | `6_consultarMaterialUnidadeFornecimento` | 38.096 | 77 |
-
