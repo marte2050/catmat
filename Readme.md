@@ -146,7 +146,7 @@ Para o processo de embeddings foi realizado um processo local e é concatenado o
 ### Modelo e coleção
 
 - **Denso**: `sentence-transformers/paraphrase-multilingual-mpnet-base-v2` (768d), buscado com prefixos de query/passage.
-- **Esparso**: `Qdrant/bm25` (idioma português), com modificador **IDF** — cobre códigos/números exatos (ex.: `i5`, `8GB`, `127V`).
+- **Esparso**: `Qdrant/bm25` (idioma português), com modificador **IDF**.
 - Coleção `catmat_items` com vetores nomeados `dense` e `sparse`; `point id = item_code`; payload com códigos/nomes e índices para filtro (`group_code`, `pdm_code`, `item_status`).
 
 ### Incremental
