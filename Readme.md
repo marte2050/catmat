@@ -37,7 +37,7 @@ A arquitetura do sistema foi construído conforme diagrama abaixo:
 
 ### Variáveis de ambiente (`.env`)
 
-O projeto lê um arquivo `.env` na raiz. As principais variáveis (com os defaults):
+O projeto lê um arquivo `.env` na raiz:
 
 | Variável | Default | Descrição |
 | --- | --- | --- |
