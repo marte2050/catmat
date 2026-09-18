@@ -70,7 +70,6 @@ docker compose -f devops/docker-compose.yaml up -d db qdrant
 ### Instalação
 
 ```bash
-# Com Poetry (recomendado)
 poetry install
 source .venv/bin/activate
 ```
