@@ -151,7 +151,7 @@ Para o processo de embeddings foi realizado um processo local e é concatenado o
 
 ### Incremental
 
-Cada item guarda `content_hash` (sha256 do texto embedado). Numa reexecução, só são reembeddados os itens cujo texto mudou (ou que nunca foram embedados) — inclusive quando o nome de grupo/classe/PDM muda.
+Cada item guarda `content_hash` (sha256 do texto embedado). Numa reexecução, só são reembeddados os itens cujo texto mudou (ou que nunca foram embedados).
 
 ### Comandos
 
