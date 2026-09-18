@@ -17,8 +17,7 @@ Os grupos são a primeira camada do PDM e representam uma categoria ampla de mat
 | **nomeGrupo** | Nome do grupo. |
 | **statusGrupo** | Situação do grupo (ativo ou inativo). |
 | **dataHoraAtualizacao** | Data e hora em que o grupo foi atualizado. |
-
-Para fazer a busca de grupos podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/1_consultarGrupoMaterial` da API do comprasnet, que retorna uma lista de grupos disponíveis.
+| **resource** | 1_consultarGrupoMaterial |
 
 ### Classes
 
@@ -32,8 +31,7 @@ As classes são a segunda camada do PDM e representam uma subcategoria dentro de
 | **nomeClasse** | Nome da classe. |
 | **statusClasse** | Situação da classe (ativo ou inativo). |
 | **dataHoraAtualizacao** | Data e hora em que a classe foi atualizada. |
-
-Para fazer a busca de classes podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/2_consultarClasseMaterial` da API do comprasnet, que retorna uma lista de classes disponíveis.
+| **resource | 2_consultarClasseMaterial |
 
 ### PDMs
 
@@ -49,8 +47,7 @@ Os PDMs são um conjunto de regras, características e valores usado para organi
 | **nomePdm** | Nome do PDM. |
 | **statusPdm** | Situação do PDM (ativo ou inativo). |
 | **dataHoraAtualizacao** | Data e hora em que o PDM foi atualizado. |
-
-Para fazer a busca de PDMs podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/3_consultarPdmMaterial` da API do comprasnet, que retorna uma lista de PDMs disponíveis.
+| **resource | 3_consultarPdmMaterial |
 
 ### Catmats
 
@@ -73,8 +70,7 @@ Os catmats são a camada final do PDM e representam os materiais cadastrados no 
 | **descricao_ncm** | Descrição do NCM. |
 | **aplica_margem_preferencia** | Indica se o catmat aplica margem de preferência ou não. |
 | **dataHoraAtualizacao** | Data e hora em que o catmat foi atualizado. |
-
-Para fazer a busca de catmats podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/4_consultarItemMaterial` da API do comprasnet, que retorna uma lista de catmats disponíveis.
+| **resource** | 4_consultarItemMaterial |
 
 ### Natureza de despesa
 
@@ -86,8 +82,7 @@ A natureza de despesa é um código que identifica a categoria de gasto associad
 | **codigoNaturezaDespesa** | Código único da natureza de despesa. |
 | **nomeNaturezaDespesa** | Nome da natureza de despesa. |
 | **statusNaturezaDespesa** | Situação da natureza de despesa (ativo ou inativo). |
-
-Para fazer a busca de natureza de despesa podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/5_consultarMaterialNaturezaDespesa` da API do comprasnet, que retorna uma lista de naturezas de despesa disponíveis.
+| **resoruce** | 5_consultarMaterialNaturezaDespesa |
 
 ### Unidade de Fornecimento
 
@@ -105,8 +100,7 @@ A unidade de fornecimento é um código que identifica a unidade de medida assoc
 | **statusUnidadeFornecimentoPdm** | Situação da unidade de fornecimento no PDM (ativo ou inativo). |
 | **statusUnidadeFornecimento** | Situação da unidade de fornecimento (ativo ou inativo). |
 | **dataHoraAtualizacao** | Data e hora em que a unidade de fornecimento foi atualizada. |
-
-Para fazer a busca de unidade de fornecimento podemos usar a URI `https://dadosabertos.compras.gov.br/modulo-material/6_consultarMaterialUnidadeFornecimento` da API do comprasnet, que retorna uma lista de unidades de fornecimento disponíveis.
+| **resource** | 6_consultarMaterialUnidadeFornecimento |
 
 ### Paginação e volumes
 
@@ -122,6 +116,8 @@ Os volumes observados na API são:
 | Catmats | `4_consultarItemMaterial` | 344.984 | 690 |
 | Natureza de despesa | `5_consultarMaterialNaturezaDespesa` | 22 | 3 |
 | Unidade de fornecimento | `6_consultarMaterialUnidadeFornecimento` | 38.096 | 77 |
+
+Os SITEBASE para a endpoint é o https://dadosabertos.compras.gov.br/modulo-material/.
 
 ### Diagrama das tabelas
 
